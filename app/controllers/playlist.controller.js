@@ -38,7 +38,8 @@ exports.findOne = (req, res) => {
     .populate("songs")
     .then((data) => {
       res.send(
-       `Tl autor ${data.name} tiene ${data.songs.length} publicaciones`
+      //  `El autor ${data.name} tiene ${data.songs.length} publicaciones`
+      data
       );
     })
     .catch((err) => {
