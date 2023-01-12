@@ -22,6 +22,8 @@ song.textContent = "Busca una cancion";
 create_songHTML.type = "text";
 songsHTML.append(song, create_songHTML);
 
+//consulta a la api
+
 const song_search = async () => {
   await fetch(
     "http://localhost:8080/api/songs/" + create_songHTML.value
@@ -35,6 +37,7 @@ const song_search = async () => {
       pinta_song(json);
     });
 };
+//pinta la consulta
 const pinta_song = (data) => {
   console.log(data);
   const name_songHTML = document.createElement("h2");
@@ -42,9 +45,11 @@ const pinta_song = (data) => {
   name_songHTML.textContent = data.name;
   const artist_songHTML = document.createElement("h2");
   artist_songHTML.id = "artist_songHTML";
-  artist_songHTML.textContent = data.artist;
-
+  artist_songHTML.innerHTML = `<h2 style="background-color: cornflowerblue;color:aliceblue;">${data.artist}</h2>`;
+  song.innerHTML = `<h3 style ="color:red">Cancion encontrada</h3>`
+  create_songHTML.remove()
   songsHTML.append(name_songHTML, artist_songHTML);
+
 };
 ///
 /// CONSTRUCTOR DE INPUT PARA PLAYLIST
@@ -62,6 +67,8 @@ playlist.textContent = "Busca una playlist";
 create_playlistHTML.type = "text";
 playlistHTML.append(playlist, create_playlistHTML);
 
+//consulta a la api
+
 const playlist_search = async () => {
   await fetch(
     "http://localhost:8080/api/playlist/" + create_playlistHTML.value
@@ -74,15 +81,27 @@ const playlist_search = async () => {
       pinta_playlist(json);
     });
 };
+
+//pinta la consulta
+
 const pinta_playlist = (data) => {
   console.log(data);
   const playlist_songHTML = document.createElement("h2");
   playlist_songHTML.id = "name_songHTML";
-  playlist_songHTML.textContent = data.name;
+  playlist_songHTML.innerHTML ="La playlist se llama: "+ data.name;
   const tamaño_playlistHTML = document.createElement("h2");
   tamaño_playlistHTML.id = "tamaño_playlistHTML";
   tamaño_playlistHTML.innerHTML ="Numero de canciones: "+ data.songs.length;
-  playlistHTML.append(playlist_songHTML, tamaño_playlistHTML);
+
+  const pFrag = document.createDocumentFragment();
+  for (let i = 0; i < data.songs.length; i++) {
+    const li = document.createElement("li");
+    li.innerHTML = data.songs[i].name;
+    pFrag.appendChild(li);
+  }
+    playlistHTML.append(playlist_songHTML, tamaño_playlistHTML, pFrag);
+
+  
 };
 
 ///
