@@ -122,9 +122,7 @@ createNameSongHTML.type = "text";
 nombreCancionHTML.textContent = "Nombre"
 artsitaCancionHTML.textContent = "Artista";
 playlistCancionHTML.textContent = "Playlist";
-// parentNode.insertBefore(nombreCancionHTML, createNameSongHTML);
-// parentNode.insertBefore(artsitaCancionHTML, createArtistHTML);
-// parentNode.insertBefore(playlistCancionHTML, creatPlaylisForSongtHTML);
+//añade elemntos al formulario
 postHTML.append(
   post,
   nombreCancionHTML,
@@ -134,14 +132,14 @@ postHTML.append(
   playlistCancionHTML,
   creatPlaylisForSongtHTML
 );
-
+// pinta los resultados de la api
 const pinta_post = (data) => {
   const idSong = document.createElement("h2");
   idSong.id = "idSong";
   idSong.innerHTML = "ID de la cancion: " + data.id;
   postHTML.append(idSong);
 };
-
+//hace la consulta a la api para la creacion de una canción
 const creaCancion = async () => {
   let data = {
     name: createNameSongHTML.value,
