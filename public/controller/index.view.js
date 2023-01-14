@@ -45,7 +45,7 @@ const pinta_song = (data) => {
   name_songHTML.textContent = data.name;
   const artist_songHTML = document.createElement("h2");
   artist_songHTML.id = "artist_songHTML";
-  artist_songHTML.innerHTML = `<h2 style="background-color: cornflowerblue;color:aliceblue;">f${data.artist}</h2>`;
+  artist_songHTML.innerHTML = `<h2 style="background-color: cornflowerblue;color:aliceblue;">${data.artist}</h2>`;
   song.innerHTML = `<h3 style ="color:red">Cancion encontrada</h3>`;
   create_songHTML.remove();
   songsHTML.append(name_songHTML, artist_songHTML);
@@ -108,6 +108,8 @@ const postHTML = document.createElement("div");
 postHTML.id = "postHTML";
 const post = document.createElement("h3");
 const createArtistHTML = document.createElement("input");
+createArtistHTML.id = "inputArtist"
+let parentNode = document.getElementById("inputArtist");
 const createNameSongHTML = document.createElement("input");
 const creatPlaylisForSongtHTML = document.createElement("input");
 const nombreCancionHTML = document.createElement("h3");
@@ -117,23 +119,26 @@ post.id = "post";
 post.textContent = "Crea una nueva cancion";
 createArtistHTML.type = "text";
 createNameSongHTML.type = "text";
-createNameSongHTML.insertBefore(nombreCancionHTML, createNameSongHTML);
-createArtistHTML.insertBefore(artsitaCancionHTML, createArtistHTML);
-creatPlaylisForSongtHTML.insertBefore(
-  playlistCancionHTML,
-  creatPlaylisForSongtHTML
-);
+nombreCancionHTML.textContent = "Nombre"
+artsitaCancionHTML.textContent = "Artista";
+playlistCancionHTML.textContent = "Playlist";
+// parentNode.insertBefore(nombreCancionHTML, createNameSongHTML);
+// parentNode.insertBefore(artsitaCancionHTML, createArtistHTML);
+// parentNode.insertBefore(playlistCancionHTML, creatPlaylisForSongtHTML);
 postHTML.append(
   post,
-  createArtistHTML,
+  nombreCancionHTML,
   createNameSongHTML,
+  artsitaCancionHTML,
+  createArtistHTML,
+  playlistCancionHTML,
   creatPlaylisForSongtHTML
 );
 
 const pinta_post = (data) => {
   const idSong = document.createElement("h2");
   idSong.id = "idSong";
-  idSong.innerHTML = "ID de la cancion: " + data._id;
+  idSong.innerHTML = "ID de la cancion: " + data.id;
   postHTML.append(idSong);
 };
 
